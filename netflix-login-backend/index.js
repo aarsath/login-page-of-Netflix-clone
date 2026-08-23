@@ -8,7 +8,7 @@ app.use(express.json())
 app.get("/", (req, res) => {
     res.send("Netflix Login Backend is running!");
 });
-app.post("/login",function(req,res){
+app.post("/",function(req,res){
     res.send("Validation email and password");
     if(req.body.Email === Email && req.body.Password === Password)
     {
