@@ -9,6 +9,7 @@ app.get("/", (req, res) => {
     res.send("Netflix Login Backend is running!");
 });
 app.post("/login",function(req,res){
+    res.send("Validation email and password");
     if(req.body.Email === Email && req.body.Password === Password)
     {
         res.send(true)
