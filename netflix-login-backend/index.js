@@ -8,17 +8,13 @@ app.use(express.json())
 app.get("/", (req, res) => {
     res.send("Netflix Login Backend is running!");
 });
-app.post("/login",function(req,res){
-    res.send("Validation email and password");
-    if(req.body.Email === Email && req.body.Password === Password)
-    {
-        res.send(true)
+app.post("/login", function (req, res) {
+    if (req.body.Email === Email && req.body.Password === Password) {
+        res.json({ success: true });
+    } else {
+        res.json({ success: false });
     }
-    else
-    {
-        res.send(false)
-    }
-})
+});
 
 app.listen(5000, function () {
     console.log("Port Running 5000....");
