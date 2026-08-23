@@ -2,7 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-const apiUrl = import.meta.env.VITE_API_URL || "https://login-page-of-netflix.onrender.com"
+const apiUrl = import.meta.env.VITE_API_URL || "https://login-page-of-netflix-clone.onrender.com"
 
 function Container() {
     const navigate = useNavigate()
