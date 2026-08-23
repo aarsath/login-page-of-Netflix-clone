@@ -2,39 +2,56 @@ import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-const apiUrl = import.meta.env.VITE_API_URL || "https://login-page-of-netflix-clone.onrender.com"
 
 function Container() {
-    const navigate = useNavigate()
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [message, setMessage] = useState("")
+        const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-    function handleLogin(event) {
-        event.preventDefault()
+    const [error, setError] = useState("");
 
-        if (email === "" || password === "") {
-            setMessage("Please enter both email and password.")
-            return
+    const navigate = useNavigate();
+
+    const handleSubmit = async (evt) => {
+
+        evt.preventDefault();
+
+        setError("");
+
+
+        if (!email || !password) {
+            setError("Please enter email and password");
+            return;
         }
 
-        setMessage("")
 
-        axios.post(`${apiUrl}/login`, {
-            Email: email,
-            Password: password,
-        })
-            .then(function (response) {
-                if (response.data.success === true) {
-                    navigate("/dashboard")
-                } else {
-                    setMessage("Wrong email or password.")
+
+        try {
+            const response = await axios.post(
+                ${process.env.REACT_APP_API_URL}/api/login,
+                {
+                    email,
+                    password
                 }
-            })
-            .catch(function (error) {
-                setMessage(error.response?.data?.message || "Unable to reach the login server. Please try again.")
-            })
+            );
 
+            console.log("Backend response:", response.data);
+
+            if (response.data.success) {
+                navigate("/dashboard");
+            }
+            else {
+                setError(response.data.message);
+            }
+
+        } catch (error) {
+            if (error.response) {
+                setError(error.response.data.message);
+                setEmail("");
+                setPassword("");
+            } else {
+                setError("Unable to connect to server");
+            }
+        }
     }
     
     return(
