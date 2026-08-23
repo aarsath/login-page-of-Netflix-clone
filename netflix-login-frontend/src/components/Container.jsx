@@ -15,7 +15,7 @@ function Container() {
             return
         }
 
-        axios.post("https://login-page-of-netflix-clone.vercel.app/login", {
+        axios.post("https://login-page-of-netflix-clone.vercel.app/api/login", {
             Email: email,
             Password: password,
         })
