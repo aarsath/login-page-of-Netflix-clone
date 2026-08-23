@@ -45,4 +45,40 @@ function Container() {
   return (
     <div
       className="w-full max-w-md rounded-lg bg-black/75 p-8 shadow-2xl"
-      style={{ boxShadow
+      style={{ boxShadow: "0 20px 50px rgba(0, 0, 0, 0.85)" }}
+    >
+      <h1 className="mb-8 text-4xl font-bold text-center text-white">Sign In</h1>
+
+      {error !== "" && (
+        <p className="mb-6 text-center text-lg font-semibold text-red-400">
+          {error}
+        </p>
+      )}
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input
+          onChange={(event) => setEmail(event.target.value)}
+          type="email"
+          placeholder="Email"
+          value={email}
+          className="w-full rounded border border-gray-700 bg-neutral-800 px-4 py-4 text-white outline-none placeholder:text-gray-400 focus:border-white"
+        />
+        <input
+          onChange={(event) => setPassword(event.target.value)}
+          type="password"
+          placeholder="Password"
+          value={password}
+          className="w-full rounded border border-gray-700 bg-neutral-800 px-4 py-4 text-white outline-none placeholder:text-gray-400 focus:border-white"
+        />
+        <button
+          type="submit"
+          className="w-full rounded bg-red-600 py-4 text-xl font-bold text-white transition hover:bg-red-700"
+        >
+          Sign In
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export default Container;
