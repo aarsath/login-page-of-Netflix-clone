@@ -15,7 +15,7 @@ function Container() {
             return
         }
 
-        axios.post("https://login-page-of-netflix-clone.onrender.com/login", {
+        axios.post("https://login-page-of-netflix-clone.onrender.com/", {
             Email: email,
             Password: password,
         })
