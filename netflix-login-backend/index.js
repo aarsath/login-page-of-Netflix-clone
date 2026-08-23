@@ -5,6 +5,9 @@ const Email = "abdularsath79@gmail.com"
 const Password = "12345678"
 app.use(cors())
 app.use(express.json())
+app.get("/", (req, res) => {
+    res.send("Netflix Login Backend is running!");
+});
 app.post("/login",function(req,res){
     if(req.body.Email === Email && req.body.Password === Password)
     {
