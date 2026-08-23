@@ -1,6 +1,9 @@
 import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+
+const apiUrl = import.meta.env.VITE_API_URL || "https://login-page-of-netflix.onrender.com"
+
 function Container() {
     const navigate = useNavigate()
     const [email, setEmail] = useState("")
@@ -15,17 +18,21 @@ function Container() {
             return
         }
 
-        axios.post("https://login-page-of-netflix-clone.onrender.com/login", {
+        setMessage("")
+
+        axios.post(`${apiUrl}/login`, {
             Email: email,
             Password: password,
         })
             .then(function (response) {
                 if (response.data.success === true) {
                     navigate("/dashboard")
+                } else {
+                    setMessage("Wrong email or password.")
                 }
             })
-            .catch(function () {
-                setMessage("Wrong email or password.")
+            .catch(function (error) {
+                setMessage(error.response?.data?.message || "Unable to reach the login server. Please try again.")
             })
 
     }
