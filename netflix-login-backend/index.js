@@ -2,31 +2,41 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-const email = process.env.LOGIN_EMAIL;
-const password = process.env.LOGIN_PASSWORD;
-const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
 
-app.get("/health", function (_req, res) {
-    res.status(200).json({ status: "ok" });
+app.get("/", (req, res) => {
+    res.send("FilmFeast backend is running!");
 });
 
-app.post("/login", function (req, res) {
-    if (!email || !password) {
-        return res.status(503).json({ success: false, message: "Login service is not configured." });
+
+app.post("/api/login", (req, res) => {
+
+    console.log("LOGIN REQUEST RECEIVED");
+    console.log(req.body);
+
+    const { email, password } = req.body;
+
+    if (email === "user@gmail.com" && password === "0011") {
+
+        res.status(200).send({
+            success: true,
+            message: "Login successful"
+        });
+
+    } else {
+
+        res.status(401).send({
+            success: false,
+            message: "Invalid email or password"
+        });
+
     }
-
-    const isValidLogin = req.body?.Email === email && req.body?.Password === password;
-
-    if (isValidLogin) {
-        return res.status(200).json({ success: true });
-    }
-
-    return res.status(401).json({ success: false, message: "Wrong email or password." });
 });
 
-app.listen(port, function () {
-    console.log(`Server running on port ${port}.`);
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+    console.log("Server started on port " + PORT);
 });
