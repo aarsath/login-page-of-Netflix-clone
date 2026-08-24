@@ -21,7 +21,8 @@ function Container() {
     }
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/login`, data);
+     const response = await axios.post(`${API_BASE_URL}/api/login`, { email, password });
+
   
 
       console.log("Backend response:", response.data);
