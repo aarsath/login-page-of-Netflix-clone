@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-    res.send("FilmFeast backend is running!");
+    res.send("Netflix backend is running!");
 });
 
 
