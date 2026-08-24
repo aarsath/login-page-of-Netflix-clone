@@ -7,6 +7,8 @@ function Container() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://login-page-of-netflix-clone.onrender.com';
+
   const navigate = useNavigate();
 
   const handleSubmit = async (evt) => {
@@ -19,10 +21,8 @@ function Container() {
     }
 
     try {
-    const response = await axios.post(
-  `${import.meta.env.VITE_API_URL}/api/login`,
-  { email, password }
-);
+      const response = await axios.post(`${API_BASE_URL}/api/login`, data);
+  
 
       console.log("Backend response:", response.data);
 
