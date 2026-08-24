@@ -77,6 +77,9 @@ function Container() {
           Sign In
         </button>
       </form>
+        <p className="mb-4 text-center text-xs text-gray-400">
+        Demo project only — not affiliated with or endorsed by Netflix.
+      </p>
     </div>
   );
 }
